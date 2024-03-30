@@ -5,8 +5,10 @@ body {
 }
 
 #canvas {
-  width: 600px;
-  height: 600px;
+  width: 50vw;
+  height: 50vw;
+  max-width: 500px;
+  max-height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
