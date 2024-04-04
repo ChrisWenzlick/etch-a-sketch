@@ -4,6 +4,9 @@ let gridSize = 16;
 let clickToColor = true;
 const hexCharacters = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];
 
+let mouseDown = false;
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
 
 
 InitializeGrid();
@@ -21,12 +24,10 @@ function InitializeGrid() {
             const gridCell = document.createElement("div");
             gridCell.className = "grid-cell";
 
-            gridCell.addEventListener('mouseover', () => {
-                ColorWithHover(gridCell);
-            });
-
-            gridCell.addEventListener('dragenter', () => {
-                ColorWithDrag(gridCell);
+            gridCell.addEventListener('mouseover', (e) => {
+                if(mouseDown || !clickToColor){
+                    ColorWithHover(gridCell);
+                }
             });
 
             gridRow.appendChild(gridCell);
@@ -35,15 +36,7 @@ function InitializeGrid() {
 }
 
 function ColorWithHover(gridCell) {
-    if(!clickToColor) {
-        gridCell.style.backgroundColor = GetColor();
-    }
-}
-
-function ColorWithDrag(gridCell) {
-    if(clickToColor) {
-        gridCell.style.backgroundColor = GetColor();
-    }
+    gridCell.style.backgroundColor = GetColor();
 }
 
 function GetColor() {
