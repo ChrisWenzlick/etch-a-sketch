@@ -1,12 +1,23 @@
 const canvas = document.querySelector("#canvas");
+const newGridButton = document.querySelector("#new-grid-button");
 
 let gridSize = 16;
 let clickToColor = true;
 const hexCharacters = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];
 
 let mouseDown = false;
-document.body.onmousedown = () => (mouseDown = true);
-document.body.onmouseup = () => (mouseDown = false);
+document.body.onmousedown = () => {mouseDown = true};
+document.body.onmouseup = () => {mouseDown = false};
+
+newGridButton.onclick = () => {
+    let input = 0;
+    
+    do {
+        input = prompt("Please enter a grid size from 1 to 100", gridSize);
+    } while(input < 1 || input > 100)
+
+    InitializeGrid();
+};
 
 
 InitializeGrid();
