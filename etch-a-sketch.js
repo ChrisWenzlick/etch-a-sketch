@@ -16,6 +16,8 @@ newGridButton.onclick = () => {
         input = prompt("Please enter a grid size from 1 to 100", gridSize);
     } while(input < 1 || input > 100)
 
+    gridSize = input;
+
     InitializeGrid();
 };
 
@@ -24,6 +26,11 @@ InitializeGrid();
 
 
 function InitializeGrid() {
+    // Remove any existing grid cells
+    while(canvas.hasChildNodes()) {
+        canvas.removeChild(canvas.firstChild);
+    }
+
     // Build each row
     for(let row = 0; row < gridSize; row++) {
         const gridRow = document.createElement("div");
@@ -40,6 +47,10 @@ function InitializeGrid() {
                     ColorWithHover(gridCell);
                 }
             });
+
+            gridCell.addEventListener('mousedown', (e) => {
+                ColorWithHover(gridCell);
+            })
 
             gridRow.appendChild(gridCell);
         }
